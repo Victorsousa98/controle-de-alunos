@@ -7,11 +7,9 @@ app.use(bodyParser.json());
 
 const port = process.env.PORT || 3000;
 
-app.get("test", (req, res) => {
-    res.send("Hello World");
+app.get('/teste', (req, res) => {
+    res.send('Hello World!');
 });
-
-
 
 //Método do express que permite que o servidor seja iniciado
     app.listen(port, () => console.log(`Servidor rodando na porta ${port}!`));
