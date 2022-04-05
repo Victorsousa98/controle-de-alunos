@@ -1,0 +1,25 @@
+{
+  "name": "controle-de-estudantes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Victorsousa98/controle-de-alunos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Victorsousa98/controle-de-alunos/issues"
+  },
+  "homepage": "https://github.com/Victorsousa98/controle-de-alunos#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15"
+  }
+}
