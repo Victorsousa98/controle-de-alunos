@@ -24,3 +24,5 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Pessoas;
 };
+
+//usar npx sequelize-cli db:migrate para criar a tabela
