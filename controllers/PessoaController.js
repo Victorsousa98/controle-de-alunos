@@ -37,6 +37,36 @@ class PessoaController {
             );
         }
     }
+
+    static async atualizarPessoa(req, res) {
+        try{
+            const pessoa = await dataBase.Pessoas.update(req.body, {//usa update para atualizar um registro
+                where: {
+                    id: req.params.id//busca o id passado na url
+                }
+            });
+            return res.status(200).json(pessoa);
+        }catch(err){
+            return res.status(500).json(
+                err.message
+            );
+        }
+    }
+
+    static async deletarPessoa(req, res) {
+        try{
+            const pessoa = await dataBase.Pessoas.destroy({//usa destroy para deletar um registro
+                where: {
+                    id: req.params.id//busca o id passado na url
+                }
+            });
+            return res.status(200).json(pessoa);
+        }catch(err){
+            return res.status(500).json(
+                err.message
+            );
+        }
+    }
 }
 
 module.exports = PessoaController;
