@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Pessoas.hasMany(models.Turmas, {//hasmany é um relacionamento de 1 para muitos
+        foreignKey: 'docente_id',
+      })
+      Pessoas.hasMany(models.Matriculas, {
+        foreignKey: 'estudante_id',
+      })
     }
   }
   Pessoas.init({
@@ -26,3 +32,4 @@ module.exports = (sequelize, DataTypes) => {
 };
 
 //usar npx sequelize-cli db:migrate para criar a tabela
+//as associações são feitas no models/
