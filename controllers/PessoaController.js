@@ -67,6 +67,73 @@ class PessoaController {
             );
         }
     }
+
+    //matricula:
+    static async pegaUmaMatricula(req, res) {
+        const { estudanteId, matriculaId } = req.params;
+        try{
+            const matricula = await dataBase.Matriculas.findOne({
+                where: {
+                    estudante_id: estudanteId,
+                    id: matriculaId
+                }
+            });
+            return res.status(200).json(matricula);
+        }catch(err){
+            return res.status(500).json(
+                err.message
+            );
+        }
+    }
+
+    static async criaMatricula(req, res) {
+        const { estudanteId } = req.params;
+        try{
+            const matricula = await dataBase.Matriculas.create({
+                estudante_id: estudanteId,
+                ...req.body
+            });
+            return res.status(201).json(matricula);
+        }catch(err){
+            return res.status(500).json(
+                err.message
+            );
+        }
+    }
+
+    static async atualizarMatricula(req, res) {
+        const { estudanteId, matriculaId } = req.params;
+        try{
+            const matricula = await dataBase.Matriculas.update(req.body, {
+                where: {
+                    estudante_id: estudanteId,
+                    id: matriculaId
+                }
+            });
+            return res.status(200).json(matricula);
+        }catch(err){
+            return res.status(500).json(
+                err.message
+            );
+        }
+    }
+
+    static async deletarMatricula(req, res) {
+        const { estudanteId, matriculaId } = req.params;
+        try{
+            const matricula = await dataBase.Matriculas.destroy({
+                where: {
+                    estudante_id: estudanteId,
+                    id: matriculaId
+                }
+            });
+            return res.status(200).json(matricula);
+        }catch(err){
+            return res.status(500).json(
+                err.message
+            );
+        }
+    }
 }
 
 module.exports = PessoaController;
