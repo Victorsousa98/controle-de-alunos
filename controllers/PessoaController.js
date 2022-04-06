@@ -26,6 +26,17 @@ class PessoaController {
             );
         }
     }
+
+    static async criarPessoa(req, res) {
+        try{
+            const pessoa = await dataBase.Pessoas.create(req.body);//usa create para criar um registro
+            return res.status(201).json(pessoa);
+        }catch(err){
+            return res.status(500).json(
+                err.message
+            );
+        }
+    }
 }
 
 module.exports = PessoaController;
