@@ -12,12 +12,13 @@ const router = Router();
         router.get('/pessoas/:estudanteId/matricula', PessoaController.pegaMatriculas);
         router.get('/pessoas/matricula/:turmaId/confirmados', PessoaController.pegaMatriculasPorTurma);
         router.get('/pessoas/matricula/lotada', PessoaController.pegaTurmasLotadas);
+        
 //POST: 
 router.post('/pessoas', PessoaController.criarPessoa);
 router.post('/pessoas/:id/restaura', PessoaController.restauraPessoa);
     //matricula:
         router.post('/pessoas/:estudanteId/matricula', PessoaController.criaMatricula);
-
+        router.post('/pessoas/:estudanteId/cancela', PessoaController.cancelaPessoa);
 //PUT:
     router.put('/pessoas/:id', PessoaController.atualizarPessoa);
     //matricula:

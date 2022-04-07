@@ -150,6 +150,31 @@ class PessoaController {
         }
     }
 
+    static async cancelaPessoa(req, res) {
+        const { estudanteId } = req.params;
+        try{
+            const matricula = await dataBase.Pessoas.update({
+                ativo: false
+            }, {
+                where: {
+                    id: estudanteId
+                }
+            });
+            const matriculas = await dataBase.Matriculas.update({
+                status: 'cancelado'
+            }, {
+                where: {
+                    estudante_id: estudanteId
+                }
+            });
+            return res.status(200).json({message: 'Pessoa cancelada com sucesso'});
+        }catch(err){
+            return res.status(500).json(
+                err.message
+            );
+        }
+    }
+
 
     static async pegaUmaMatricula(req, res) {
         const { estudanteId, matriculaId } = req.params;
