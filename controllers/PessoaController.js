@@ -1,4 +1,4 @@
-const dataBase = require('../models/index.js');
+const dataBase = require('../models');
 
 class PessoaController {
 
@@ -98,6 +98,19 @@ class PessoaController {
     }
 
     //matricula:
+    static async pegaMatriculas(req, res) {
+        try{
+            const estudanteId = req.params.estudanteId;
+            const pessoa = await dataBase.Pessoas.findOne({where: {id: estudanteId}});
+            const matriculas = await pessoa.getAulasMatriculadas();
+            return res.status(200).json(matriculas);
+        }catch(err){
+            return res.status(500).json(
+                err.message
+            );
+        }
+    }
+
     static async pegaUmaMatricula(req, res) {
         const { estudanteId, matriculaId } = req.params;
         try{
