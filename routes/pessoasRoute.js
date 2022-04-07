@@ -11,7 +11,7 @@ const router = Router();
         router.get('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.pegaUmaMatricula);
         router.get('/pessoas/:estudanteId/matricula', PessoaController.pegaMatriculas);
         router.get('/pessoas/matricula/:turmaId/confirmados', PessoaController.pegaMatriculasPorTurma);
-
+        router.get('/pessoas/matricula/lotada', PessoaController.pegaTurmasLotadas);
 //POST: 
 router.post('/pessoas', PessoaController.criarPessoa);
 router.post('/pessoas/:id/restaura', PessoaController.restauraPessoa);
