@@ -111,6 +111,25 @@ class PessoaController {
         }
     }
 
+    static async pegaMatriculasPorTurma(req, res) {
+        const { turmaId } = req.params;
+        try{
+            const matriculas = await dataBase.Matriculas.findAndCountAll({
+                where: {
+                    turma_id: turmaId,
+                    status: 'confirmado'
+                },
+                limit: 10,
+                order: [['estudante_id', 'ASC']]
+            });
+            return res.status(200).json(matriculas);
+        }catch(err){
+            return res.status(500).json(
+                err.message
+            );
+        }
+    }
+
     static async pegaUmaMatricula(req, res) {
         const { estudanteId, matriculaId } = req.params;
         try{
