@@ -5,17 +5,18 @@ const TurmaController = require('../controllers/TurmaController');
 const router = Router();
 
 //GET:
-    router.get('/turmas', TurmaController.pegarTodasAsTurmas);
-    router.get('/turmas/:id', TurmaController.pegarTurmaPorId);
+    router.get('/turmas', TurmaController.pegaTodasAsTurmas);
+    router.get('/turmas/:id', TurmaController.pegaTurma);
 
 //POST: 
-    router.post('/turmas', TurmaController.criarTurma);
+    router.post('/turmas', TurmaController.criaTurma);
+    router.post('/turmas/:id/restaura', TurmaController.restauraTurma)  
 
 //PUT:
-    router.put('/turmas/:id', TurmaController.atualizarTurma);
+    router.put('/turmas/:id', TurmaController.atualizaTurma);
 
 //DELETE:
-    router.delete('/turmas/:id', TurmaController.deletarTurma);
+    router.delete('/turmas/:id', TurmaController.apagaTurma);
 
 
 module.exports = router;

@@ -1,72 +1,67 @@
-const dataBase = require('../models');
+const Services = require('../services/Services')
+const niveisServices = new Services('Niveis')
 
-class NivelController{
-    static async pegarTodosOsNiveis(req, res) {
-        try{
-            const todosOsNiveis = await dataBase.Niveis.findAll();//usa findAll para buscar todos os registros
-            return res.status(200).json(todosOsNiveis);
-        }catch(err){
-            return res.status(500).json(
-                err.message
-            );
-        }
+class NivelController {
+  static async pegaTodosOsNiveis(req, res){  
+    try {
+      const todosOsNiveis = await niveisServices.pegaTodosOsRegistros()
+      return res.status(200).json(todosOsNiveis)  
+    } catch (error) {
+      return res.status(500).json(error.message)
     }
+  }
 
-    static async pegarNivelPorId(req, res) {
-        try{
-            const nivel = await dataBase.Niveis.findOne({//usar findONe para buscar apenas um registro
-                where: {
-                    id: req.params.id//busca o id passado na url
-                }
-            });
-            return res.status(200).json(nivel);
-        }catch(err){
-            return res.status(500).json(
-                err.message
-            );
-        }
+  static async pegaNivel(req, res) {  
+    const { id } = req.params
+    try {
+      const nivel = await niveisServices.pegaUmRegistro({ id })
+      return res.status(200).json(nivel)
+    } catch (error) {
+      return res.status(500).json(error.message)
     }
+  }
 
-    static async criarNivel(req, res) {
-        try{
-            const nivel = await dataBase.Niveis.create(req.body);//usa create para criar um registro
-            return res.status(201).json(nivel);
-        }catch(err){
-            return res.status(500).json(
-                err.message
-            );
-        }
+  static async criaNivel(req, res) {  
+    const novoNivel = req.body
+    try {
+      const novoNivelCriado = await niveisServices.criaRegistro(novoNivel)
+      return res.status(200).json(novoNivelCriado)
+    } catch (error) {
+      return res.status(500).json(error.message)
     }
+  }
 
-    static async atualizarNivel(req, res) {
-        try{
-            const nivel = await dataBase.Niveis.update(req.body, {//usa update para atualizar um registro
-                where: {
-                    id: req.params.id//busca o id passado na url
-                }
-            });
-            return res.status(200).json(nivel);
-        }catch(err){
-            return res.status(500).json(
-                err.message
-            );
-        }
+  static async atualizaNivel(req, res) {  
+    const { id } = req.params
+    const novasInfos = req.body
+    try {
+      await niveisServices.atualizaRegistro(novasInfos, id)
+      return res.status(200).json({ mensagem: `id ${id} atualizado` })
+    } catch (error) {
+      return res.status(500).json(error.message)
     }
+  }
 
-    static async deletarNivel(req, res) {
-        try{
-            const nivel = await dataBase.Niveis.destroy({//usa destroy para deletar um registro
-                where: {
-                    id: req.params.id//busca o id passado na url
-                }
-            });
-            return res.status(200).json(nivel);
-        }catch(err){
-            return res.status(500).json(
-                err.message
-            );
-        }
+  static async apagaNivel(req, res) {  
+    const { id } = req.params
+    try {
+      await niveisServices.apagaRegistro(id)
+      return res.status(200).json({ mensagem: `id ${id} deletado` })
+
+    } catch (error) {
+      return res.status(500).json(error.message)
     }
+  }
+
+  static async restauraNivel(req, res) {  
+    const { id } = req.params
+    try {
+      await niveisServices.restauraRegistro(id)
+      return res.status(200).json({ mensagem: `id ${id} restaurado` })
+    } catch (error) {
+      return res.status(500).json(error.message)
+    }
+  }
 }
 
-module.exports = NivelController;
+module.exports = NivelController
