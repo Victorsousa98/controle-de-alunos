@@ -1,9 +1,10 @@
 const dataBase = require('../models/index.js');
 
 class PessoaController {
+
     static async pegarTodasAsPessoas(req, res) {
         try{
-            const todasAsPessoas = await dataBase.Pessoas.findAll();//usa findAll para buscar todos os registros
+            const todasAsPessoas = await dataBase.Pessoas.scope('todos').findAll();//usa findAll para buscar todos os registros
             return res.status(200).json(todasAsPessoas);
         }catch(err){
             return res.status(500).json(
@@ -12,6 +13,18 @@ class PessoaController {
         }
     }
 
+    static async pegarTodasPessoasAtivas(req, res) {
+        try{
+            const PessoasAtivas = await dataBase.Pessoas.findAll();//usa findAll para buscar todos os registros
+            return res.status(200).json(PessoasAtivas);
+        }catch(err){
+            return res.status(500).json(
+                err.message
+            );
+        }
+    }
+
+    
     static async pegarPessoaPorId(req, res) {
         try{
             const pessoa = await dataBase.Pessoas.findOne({//usar findONe para buscar apenas um registro
