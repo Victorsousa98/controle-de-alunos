@@ -10,7 +10,8 @@ const router = Router();
         router.get('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.pegaUmaMatricula);
 
 //POST: 
-    router.post('/pessoas', PessoaController.criarPessoa);
+router.post('/pessoas', PessoaController.criarPessoa);
+router.post('/pessoas/:id/restaura', PessoaController.restauraPessoa);
     //matricula:
         router.post('/pessoas/:estudanteId/matricula', PessoaController.criaMatricula);
 
