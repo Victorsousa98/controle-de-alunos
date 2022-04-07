@@ -1,9 +1,15 @@
 const dataBase = require('../models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 class TurmaController{
     static async pegarTodasAsTurmas(req, res) {
+        const {data_inicial, data_final} = req.query;
+        const where = {};
+        data_inicial || data_final ? where.data_inicio = {[Op.between]: [data_inicial, data_final]} : null;
+        
         try{
-            const todasAsTurmas = await dataBase.Turmas.findAll();//usa findAll para buscar todos os registros
+            const todasAsTurmas = await dataBase.Turmas.findAll({where});//usa findAll para buscar todos os registros
             return res.status(200).json(todasAsTurmas);
         }catch(err){
             return res.status(500).json(
@@ -11,6 +17,8 @@ class TurmaController{
             );
         }
     }
+
+ 
 
     static async pegarTurmaPorId(req, res) {
         try{
