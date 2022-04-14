@@ -1,1 +1,1 @@
-
+um Sistema de Controle de Alunos de uma escola, usando comandos do Sequelize para criar modelos, migrações e para subir Seeds. O projeto foi todo organizado no padrão MVC e com camadas de controles onde fazemos a conexão com os modelos e as operações de CRUD. 
